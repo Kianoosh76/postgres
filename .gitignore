@@ -42,3 +42,14 @@ lib*.pc
 /Debug/
 /Release/
 /tmp_install/
+/DemoDir/
+/.idea/
+/cmake-build-debug/
+.settings
+.vscode
+CMakeLists.txt
+.DS_Store
+logfile
+run.sh
+.project
+.cproject
