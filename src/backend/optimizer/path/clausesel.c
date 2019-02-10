@@ -104,6 +104,7 @@ clauselist_selectivity(PlannerInfo *root,
 					   JoinType jointype,
 					   SpecialJoinInfo *sjinfo)
 {
+	return 1;
 	Selectivity s1 = 1.0;
 	RelOptInfo *rel;
 	Bitmapset  *estimatedclauses = NULL;

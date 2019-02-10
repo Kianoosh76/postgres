@@ -616,8 +616,7 @@ try_mergejoin_path(PlannerInfo *root,
 						   outer_path, inner_path,
 						   outersortkeys, innersortkeys,
 						   extra);
-	workspace.total_cost = 0;
-	workspace.startup_cost = 0;
+	
 
 	if (add_path_precheck(joinrel,
 						  workspace.startup_cost, workspace.total_cost,
