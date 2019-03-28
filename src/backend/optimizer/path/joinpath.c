@@ -89,6 +89,11 @@ static void generate_mergejoin_paths(PlannerInfo *root,
 						 List *merge_pathkeys,
 						 bool is_partial);
 
+void manipulate_cost(JoinCostWorkspace *w){
+	w->run_cost /= 1e5;
+	w->total_cost /= 1e5;
+	w->startup_cost /= 1e5;
+}
 
 /*
  * add_paths_to_joinrel
@@ -421,6 +426,8 @@ try_nestloop_path(PlannerInfo *root,
 	 */
 	initial_cost_nestloop(root, &workspace, jointype,
 						  outer_path, inner_path, extra);
+	// manipulate_cost(&workspace);
+	printf("Nest join cost: %lf\n", workspace.total_cost);
 
 	if (add_path_precheck(joinrel,
 						  workspace.startup_cost, workspace.total_cost,
@@ -616,7 +623,8 @@ try_mergejoin_path(PlannerInfo *root,
 						   outer_path, inner_path,
 						   outersortkeys, innersortkeys,
 						   extra);
-	
+	// manipulate_cost(&workspace);
+	printf("Merge join cost: %lf\n", workspace.total_cost);
 
 	if (add_path_precheck(joinrel,
 						  workspace.startup_cost, workspace.total_cost,
@@ -751,6 +759,8 @@ try_hashjoin_path(PlannerInfo *root,
 	 */
 	initial_cost_hashjoin(root, &workspace, jointype, hashclauses,
 						  outer_path, inner_path, extra, false);
+	// manipulate_cost(&workspace);
+	printf("Hash join cost: %lf\n", workspace.total_cost);
 
 	if (add_path_precheck(joinrel,
 						  workspace.startup_cost, workspace.total_cost,

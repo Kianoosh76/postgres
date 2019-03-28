@@ -104,7 +104,6 @@ clauselist_selectivity(PlannerInfo *root,
 					   JoinType jointype,
 					   SpecialJoinInfo *sjinfo)
 {
-	return 1;
 	Selectivity s1 = 1.0;
 	RelOptInfo *rel;
 	Bitmapset  *estimatedclauses = NULL;
@@ -324,7 +323,19 @@ clauselist_selectivity(PlannerInfo *root,
 		pfree(rqlist);
 		rqlist = rqnext;
 	}
+	
+	static int randomization = 0;
+	if (fabs(s1 - 0.007612) <= 1e-5){
+		randomization++;
+		if (false && ((randomization-1)/1) % 2 == 1){
+			printf("Using the correct selectivity\n");
+			return 0;
+		}
+		printf("Using the wrong selectivity %lf\n", s1);
+	}
 
+
+	printf("output selectivity (Clauselist for more than one clause) %lf\n", s1);
 	return s1;
 }
 
@@ -854,6 +865,6 @@ clause_selectivity(PlannerInfo *root,
 #ifdef SELECTIVITY_DEBUG
 	elog(DEBUG4, "clause_selectivity: s1 %f", s1);
 #endif							/* SELECTIVITY_DEBUG */
-
+	printf("Clause selectivity is %lf\n", s1);
 	return s1;
 }

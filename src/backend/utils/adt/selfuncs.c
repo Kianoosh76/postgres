@@ -630,6 +630,7 @@ scalarineqsel(PlannerInfo *root, Oid operator, bool isgt, bool iseq,
 	/* result should be in range, but make sure... */
 	CLAMP_PROBABILITY(selec);
 
+	printf("Final selectivity %lf\n", selec);
 	return selec;
 }
 
@@ -1086,6 +1087,7 @@ ineq_histogram_selectivity(PlannerInfo *root,
 		free_attstatsslot(&sslot);
 	}
 
+	printf("%lf Hist select\n", hist_selec);
 	return hist_selec;
 }
 
