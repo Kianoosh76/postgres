@@ -426,7 +426,7 @@ try_nestloop_path(PlannerInfo *root,
 	 */
 	initial_cost_nestloop(root, &workspace, jointype,
 						  outer_path, inner_path, extra);
-	// manipulate_cost(&workspace);
+	manipulate_cost(&workspace);
 	printf("Nest join cost: %lf\n", workspace.total_cost);
 
 	if (add_path_precheck(joinrel,
