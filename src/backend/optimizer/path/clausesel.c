@@ -325,11 +325,11 @@ clauselist_selectivity(PlannerInfo *root,
 	}
 	
 	static int randomization = 0;
-	if (fabs(s1 - 0.027249) <= 1e-5){
+	if (fabs(s1 - 0.096025) <= 1e-5){
 		randomization++;
 		if (true || ((randomization-1)/1) % 2 == 1){
 			printf("Using the correct selectivity\n");
-			return 0.0040571199797144;
+			return 0.0142033749289831;
 		}
 		printf("Using the wrong selectivity %lf\n", s1);
 	}
